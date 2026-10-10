@@ -18,6 +18,8 @@ $ mixtape
 - **`mixtape`** / **`mixtape today`**: listens, total listening time, and every song you played today with how many times you played it
 - **`mixtape week`**: the last 7 days, with listening time per day and your top tracks and artists
 - **`mixtape log`**: every play today in order, including skips
+- **`mixtape year`**: your listening month by month for the last 12 months, one row per month and one cell per day, plus your current and longest streak. Add `--year 2026` for a calendar year.
+- **`mixtape wrapped`**: a recap of this month so far, with top songs and artists, when you listen, and highlights like your biggest day and longest streak. Add `--month 2026-09` or `--year 2026` for another period.
 - **`mixtape now`**: what's playing right now
 - **`mixtape status`**: whether the recorder is running and where the data lives
 
@@ -65,7 +67,7 @@ macOS keeps a system-wide **Now Playing** record: the track shown in Control Cen
 - Played time only accrues while the track is actually playing. Pauses, gaps between tracks and time the Mac spends asleep don't count.
 - Looping a track counts each loop as a separate play.
 
-A play **counts as a listen** once you've heard half the track or 4 minutes, whichever comes first. Tracks of 30 seconds or less never count. This is Last.fm's scrobbling rule. Shorter plays show up as *skipped*. Listening time includes everything you heard, skips included.
+A play **counts as a listen** once you've heard half the track or 4 minutes, whichever comes first. Tracks of 30 seconds or less never count. This is Last.fm's scrobbling rule. Shorter plays show up as *skipped*. Listening time includes everything you heard, skips included. A day counts toward your streak if it has at least one listen. The streak stays alive until a whole day passes without music.
 
 Everything stays on your Mac in a SQLite database at `~/.local/share/mixtape/mixtape.db` (or under `$XDG_DATA_HOME`, or `$MIXTAPE_HOME`). It keeps growing, so your history is never thrown away.
 

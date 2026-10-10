@@ -61,3 +61,37 @@ export function formatPosition(sec: number): string {
   const s = total % 60;
   return `${m}:${String(s).padStart(2, "0")}`;
 }
+
+const FULL_MONTH_NAMES = [
+  "January", "February", "March", "April", "May", "June",
+  "July", "August", "September", "October", "November", "December",
+];
+
+// "Sep", or "Sep 2026" with the year.
+export function formatMonthShort(date: Date, withYear = false): string {
+  const name = MONTH_NAMES[date.getMonth()] ?? "";
+  return withYear ? `${name} ${date.getFullYear()}` : name;
+}
+
+// "September", or "September 2026" with the year.
+export function formatMonthLong(date: Date, withYear = false): string {
+  const name = FULL_MONTH_NAMES[date.getMonth()] ?? "";
+  return withYear ? `${name} ${date.getFullYear()}` : name;
+}
+
+export function fromDateKey(key: string): Date {
+  const [y, m, d] = key.split("-").map(Number) as [number, number, number];
+  return new Date(y, m - 1, d);
+}
+
+// "7 – 16 Sep", "28 Sep – 3 Oct", "28 Dec 2025 – 3 Jan 2026"
+export function formatDateRange(fromKey: string, toKey: string): string {
+  const from = fromDateKey(fromKey);
+  const to = fromDateKey(toKey);
+  if (fromKey === toKey) return `${to.getDate()} ${formatMonthShort(to)}`;
+  if (from.getFullYear() !== to.getFullYear()) {
+    return `${from.getDate()} ${formatMonthShort(from, true)} – ${to.getDate()} ${formatMonthShort(to, true)}`;
+  }
+  if (from.getMonth() === to.getMonth()) return `${from.getDate()} – ${to.getDate()} ${formatMonthShort(to)}`;
+  return `${from.getDate()} ${formatMonthShort(from)} – ${to.getDate()} ${formatMonthShort(to)}`;
+}

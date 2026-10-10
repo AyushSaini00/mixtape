@@ -49,7 +49,7 @@ export type DayStat = {
 
 export type WeekSummary = Summary & { days: DayStat[] };
 
-function trackKey(listen: Pick<Listen, "title" | "artist">) {
+export function trackKey(listen: Pick<Listen, "title" | "artist">) {
   return `${listen.title.toLowerCase()}\u0000${listen.artist.toLowerCase()}`;
 }
 

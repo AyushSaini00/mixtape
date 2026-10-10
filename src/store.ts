@@ -161,6 +161,13 @@ export class Store {
     return row ? toListen(row) : null;
   }
 
+  firstListenAt(): number | null {
+    const { first } = this.db.prepare("SELECT MIN(started_at) AS first FROM listens").get() as {
+      first: number | null;
+    };
+    return first;
+  }
+
   countListens(): number {
     const { n } = this.db.prepare("SELECT COUNT(*) AS n FROM listens").get() as { n: number };
     return n;
