@@ -1,6 +1,8 @@
 class Mixtape < Formula
   desc "Track and analyze your YouTube Music listening habits from the terminal"
   homepage "https://github.com/AyushSaini00/mixtape"
+  url "https://github.com/AyushSaini00/mixtape/archive/refs/tags/v0.1.0.tar.gz"
+  sha256 "eb372f8e2913770403d904577c1babb79cf2dcf9d9ddc39070b86f81e7829c0c"
   head "https://github.com/AyushSaini00/mixtape.git", branch: "main"
 
   depends_on :macos
