@@ -1,0 +1,32 @@
+# Pushing a vX.Y.Z tag builds the package and attaches it to a GitHub release
+# as mixtape.tgz, which install.sh installs with npm.
+name: Release
+
+on:
+  push:
+    tags: ["v*"]
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-node@v5
+        with:
+          node-version: 22
+      - name: Tag matches package.json
+        run: test "v$(node -p 'require("./package.json").version')" = "$GITHUB_REF_NAME"
+      - run: npm ci
+      - run: npm run typecheck
+      - run: npm test
+      - name: Pack
+        run: |
+          npm pack
+          mv mixtape-*.tgz mixtape.tgz
+      - name: Publish release
+        run: gh release create "$GITHUB_REF_NAME" mixtape.tgz --title "$GITHUB_REF_NAME" --generate-notes
+        env:
+          GH_TOKEN: ${{ github.token }}

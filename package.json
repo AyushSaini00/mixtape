@@ -1,0 +1,38 @@
+{
+  "name": "mixtape",
+  "version": "0.1.0",
+  "description": "Track and analyze your YouTube Music listening habits from the terminal (macOS).",
+  "type": "module",
+  "bin": {
+    "mixtape": "dist/main.js"
+  },
+  "files": [
+    "dist"
+  ],
+  "os": [
+    "darwin"
+  ],
+  "engines": {
+    "node": ">=22.13"
+  },
+  "scripts": {
+    "build": "tsc -p tsconfig.build.json",
+    "typecheck": "tsc --noEmit",
+    "test": "node --disable-warning=ExperimentalWarning --test test/*.test.ts",
+    "dev": "node src/main.ts",
+    "prepare": "npm run build"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AyushSaini00/mixtape.git"
+  },
+  "homepage": "https://github.com/AyushSaini00/mixtape#readme",
+  "bugs": {
+    "url": "https://github.com/AyushSaini00/mixtape/issues"
+  },
+  "author": "Ayush Saini",
+  "devDependencies": {
+    "@types/node": "^22.20.5",
+    "typescript": "^7.0.2"
+  }
+}
